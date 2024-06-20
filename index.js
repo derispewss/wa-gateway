@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const http = require("http");
+const fs = require("fs");
 const path = require("path");
 const MainRouter = require("./app/routers");
 const errorHandlerMiddleware = require("./app/middlewares/error_middleware");
@@ -34,6 +35,9 @@ server.listen(PORT);
 
 // Set the credentials directory to /tmp/wa_credentials
 const credentialsDir = path.join('/tmp', 'wa_credentials');
+if (!fs.existsSync(credentialsDir)) {
+  fs.mkdirSync(credentialsDir, { recursive: true });
+}
 whatsapp.setCredentialsDir(credentialsDir);
 
 whatsapp.onConnected((session) => {
