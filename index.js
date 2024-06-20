@@ -32,6 +32,10 @@ var server = http.createServer(app);
 server.on("listening", () => console.log("APP IS RUNNING ON PORT " + PORT));
 server.listen(PORT);
 
+// Set the credentials directory to /tmp/wa_credentials
+const credentialsDir = path.join('/tmp', 'wa_credentials');
+whatsapp.setCredentialsDir(credentialsDir);
+
 whatsapp.onConnected((session) => {
   console.log("connected => ", session);
 });
