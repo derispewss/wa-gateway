@@ -18,19 +18,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set("view engine", "ejs");
+
 // Public Path
 app.use("/p", express.static(path.resolve("public")));
 app.use("/p/*", (req, res) => res.status(404).send("Media Not Found"));
 
 app.use(MainRouter);
-
 app.use(errorHandlerMiddleware);
 
 const PORT = process.env.PORT || "5000";
 app.set("port", PORT);
 var server = http.createServer(app);
 server.on("listening", () => console.log("APP IS RUNNING ON PORT " + PORT));
-
 server.listen(PORT);
 
 whatsapp.onConnected((session) => {

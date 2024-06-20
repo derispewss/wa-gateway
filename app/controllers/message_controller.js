@@ -33,6 +33,7 @@ exports.sendMessage = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.sendBulkMessage = async (req, res, next) => {
   try {
     const sessionId =
